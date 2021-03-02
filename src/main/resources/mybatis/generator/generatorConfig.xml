@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+        <!--<commentGenerator>-->
+        <!--<property name="suppressAllComments" value="true" />-->
+        <!--</commentGenerator>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/projecttracking?useUnicode=true&amp;characterEncoding=utf8"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--实体类-->
+        <javaModelGenerator targetPackage="net.suncaper.userprovider.domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 映射文件 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--Dao 接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="net.suncaper.userprovider.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="pt_user" domainObjectName="User">
+            <property name="rootClass" value="net.suncaper.userprovider.domain.UserExt"/>
+            <property name="rootInterface" value="net.suncaper.userprovider.mapper.UserMapperExt"/>
+        </table>
+        <table tableName="pt_role" domainObjectName="Role">
+            <property name="rootClass" value="net.suncaper.userprovider.domain.RoleExt"/>
+        </table>
+        <table tableName="pt_permission" domainObjectName="Permission">
+            <property name="rootClass" value="net.suncaper.userprovider.domain.PermissionExt"/>
+            <property name="rootInterface" value="net.suncaper.userprovider.mapper.PermissionMapperExt"/>
+        </table>
+        <table tableName="pt_user_role" domainObjectName="UserRole"></table>
+        <table tableName="pt_role_permission" domainObjectName="RolePermission"></table>
+
+    </context>
+
+
+</generatorConfiguration>
